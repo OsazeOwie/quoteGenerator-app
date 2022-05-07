@@ -43,13 +43,13 @@ body{
 }
 #btn{
     position: absolute;
-    top: 90%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     background-color: rgb(92, 141, 164);
     width: 130px;
-    height: 29px;
+    height: 40px;
     border: 2px solid rgb(125, 157, 199);
     border-radius: 2px;
     color: white;
