@@ -9,29 +9,34 @@ const borderColor = document.getElementById("container");
 aurthors name with the use of an API and also changes the color of the background
 */
 function generateQuote() {
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'quotes15.p.rapidapi.com',
-            'X-RapidAPI-Key': '5cc4be791bmsh4f1e14656a36b6dp1bd2e9jsnba59f6029352'
+      const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Host': 'quotes15.p.rapidapi.com',
+                'X-RapidAPI-Key': '5cc4be791bmsh4f1e14656a36b6dp1bd2e9jsnba59f6029352'
+            }
+        };
+        
+        if (options !== null) {
+            fetch("https://quotes15.p.rapidapi.com/quotes/random/", options)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${ response.status }`);
+                }
+                return response.json();
+              })
+              .then((response) => {
+                quoteTxt.innerHTML = response.content;
+                author.innerHTML = response.originator.name;
+                const random = Math.floor(Math.random() * bgColorArr.length);
+                bgColor.style.background = bgColorArr[random];
+                borderColor.style.borderColor = borderColorArr[random];
+                quoteBtn.style.backgroundColor = borderColorArr[random];
+                quoteBtn.style.color = "black";
+              })
+              .catch((err) => console.error(err.message));
+          }
         }
-    };
-    
-    fetch('https://quotes15.p.rapidapi.com/quotes/random/', options)
-        .then(response => response.json())
-        .then(response => {
-            quoteTxt.innerHTML = response.content;
-            author.innerHTML = response.originator.name;
-        })
-        .catch(err => console.error(err));
-
-    const random = Math.floor(Math.random() * bgColorArr.length);
-    bgColor.style.background = bgColorArr[random];
-    borderColor.style.borderColor = borderColorArr[random];
-    quoteBtn.style.backgroundColor = borderColorArr[random];
-    quoteBtn.style.color = "black";
-}
-
 
 
 //An array of backgroundcolors
